@@ -101,7 +101,7 @@ To estimate the positions of the lanes:
 3. compute a second degree polynom for each lane, fitting the points found previously.
 4. draw the zone of interest defines by these 2 computed lanes
 
-![Sobel filter][image5]
+![Find lanes][image5]
 
 #### 7. Unwarp the bird-eye view.
 Here the inverse of the bird-eye view is applied to have the image added to the original image.

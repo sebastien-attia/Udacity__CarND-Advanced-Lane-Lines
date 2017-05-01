@@ -22,7 +22,7 @@ The goals / steps of this project are the following:
 [image2]: ./output_images/Undistort_image.png "Undistort image"
 [image3]: ./output_images/Bird-eye-view_road.png "Bird eye view of the road"
 [image4]: ./output_images/Thresholded_gradients.png "Sobel filter"
-[image5]: ./output_images/find_lanes_1.png "Find lanes 1"
+[image5]: ./output_images/Find_lanes_1.png "Find lanes 1"
 [image6]: ./examples/example_output.jpg "Output"
 [video1]: ./output_images/debug_project.mp4 "Debug project video"
 [video2]: ./output_images/project.mp4 "Project video"

@@ -1,7 +1,3 @@
-## Advanced Lane Finding
-[![Udacity - Self-Driving Car NanoDegree](https://s3.amazonaws.com/udacity-sdc/github/shield-carnd.svg)](http://www.udacity.com/drive)
-
-
 **Advanced Lane Finding Project**
 
 The goals / steps of this project are the following:
@@ -19,6 +15,7 @@ The goals / steps of this project are the following:
     f- Find the lanes and compute the curvature  
     g- Unwarp the bird-eye view  
     h- Add the found lanes image to the original image  
+6. Discussion on how to improve the process
 
 [//]: # (Image References)
 
@@ -28,11 +25,6 @@ The goals / steps of this project are the following:
 [image4]: ./output_images/Thresholded_gradients.png "Sobel filter"
 [image5]: ./output_images/Find_lanes_1.png "Find lanes 1"
 [image6]: ./examples/example_output.jpg "Output"
-[video1]: ./output_images/debug_project.mp4 "Debug project video"
-[video2]: ./output_images/project.mp4 "Project video"
-[video3]: ./output_images/debug_challenge.mp4 "Debug project video"
-[video4]: ./output_images/challenge.mp4 "Project video"
-[video5]: ./output_images/debug_harder_challenge.mp4 "Debug project video"
 
 ---
 
@@ -111,9 +103,42 @@ To estimate the positions of the lanes:
 Here the inverse of the bird-eye view is applied to have the image added to the original image.
 
 #### 8. Display the result.
-The following video is debug version of the final project video [Project debug video][video1]
+The following video is debug version of the final project video:
+<iframe width="560" height="315" src="https://www.youtube.com/embed/gg59lBWPJfM" frameborder="0" allowfullscreen></iframe>
 
-And the final project video [Project video][video2].
+And the final project video:
+<iframe width="560" height="315" src="https://www.youtube.com/embed/AFnZ4edENXo" frameborder="0" allowfullscreen></iframe>
 
-For the challenge: [Challenge debug video][video3] and [Challenge video][video4].  
-And for the harder challenge: [Harder challenge debug video][video5]
+For the challenge, the debug version:
+<iframe width="560" height="315" src="https://www.youtube.com/embed/ykTGXsY4k8E" frameborder="0" allowfullscreen></iframe>
+
+And the final version:
+<iframe width="560" height="315" src="https://www.youtube.com/embed/kAk3AjkK7aQ" frameborder="0" allowfullscreen></iframe>
+
+And for the harder challenge, the debug version:
+<iframe width="560" height="315" src="https://www.youtube.com/embed/M0PpyVI4Lls" frameborder="0" allowfullscreen></iframe>
+And the final version:
+<iframe width="560" height="315" src="https://www.youtube.com/embed/95LBjvIq7LM" frameborder="0" allowfullscreen></iframe>
+
+#### 9. Discussion
+
+The biggest problems I have is when:
+a. the color of the road changes, from dark to light for example,
+b. there are shadows of a tree for example on the road,
+c. the road has not an homogeneous color (some dark zone on a white road for example),
+In these cases, the different filters (thresholded Color and Sobel filters) are not performant enough to
+select only the lanes and add some noises in the cloud of points got by the algorithm.
+
+Several ideas could be tested to improve the quality to find the lanes:
+a. A first idea would be to have several set of filters, compute the best polynomial
+fitting for each set of filters, compute a scoring for each set (based for example on the
+  standard deviation) and keep only the best one.
+In the current version of the code, I use a similar approach, where I use 2 algorithms
+to find the lanes, and I keep only the one giving the result closer to the middle of the image.
+
+b. A second idea is to use the result of the previous lanes to check the consistency with the
+result of the current lanes finding. I currently use only the previous lane to complete
+with data missing on the current lane.
+We could maybe imagine to superpose the n last bird-eye view images and fit a polynomial
+on this "big" image of (n x 720)x1280. And for each frame, we would take the (n-1) frames
+to compute the polynomial fit.
